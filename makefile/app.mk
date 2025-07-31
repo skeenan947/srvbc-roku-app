@@ -62,7 +62,7 @@ APPS_ROOT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 # the current directory is the app root directory
 SOURCEDIR := .
 
-DISTREL := $(APPS_ROOT_DIR)/dist
+DISTREL := $(APPS_ROOT_DIR)/../dist
 COMMONREL := $(APPS_ROOT_DIR)/common
 
 ZIPREL := $(DISTREL)/apps
