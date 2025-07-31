@@ -147,7 +147,7 @@ endif
 # This contains the set of files that are to be deployed on a Roku.
 # -------------------------------------------------------------------------
 .PHONY: $(APPNAME)
-$(APPNAME): manifest
+$(APPNAME):
 	@echo "*** Creating $(APPNAME).zip ***"
 
 	@echo "  >> removing old application zip $(APP_ZIP_FILE)"
@@ -174,11 +174,11 @@ $(APPNAME): manifest
 # zip .png files without compression
 # do not zip up Makefiles, or any files ending with '~'
 	@echo "  >> creating application zip $(APP_ZIP_FILE)"
-	@if [ -d $(SOURCEDIR) ]; then \
-		(zip -0 -r "$(APP_ZIP_FILE)" . -i \*.png $(ZIP_EXCLUDE)); \
-		(zip -9 -r "$(APP_ZIP_FILE)" . -x \*~ -x \*.png -x Makefile $(ZIP_EXCLUDE)); \
+	@if [ -d $(SOURCEDIR)/source ]; then \
+		(cd $(SOURCEDIR)/source && zip -0 -r "$(APP_ZIP_FILE)" . -i \*.png); \
+		(cd $(SOURCEDIR)/source && zip -9 -r "$(APP_ZIP_FILE)" . -x \*~ -x \*.png -x Makefile); \
 	else \
-		echo "Source for $(APPNAME) not found at $(SOURCEDIR)"; \
+		echo "Source for $(APPNAME) not found at $(SOURCEDIR)/source"; \
 	fi
 
 	@if [ "$(IMPORTCLEANUP)" ]; then \
